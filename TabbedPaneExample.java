@@ -1,35 +1,40 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class TabbedPaneExample {
     public static void main(String[] args) {
-
-        JFrame frame = new JFrame("Notes and Reminders");
-        frame.setSize(400, 300);
+        JFrame frame = new JFrame("JTabbedPane Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
 
-        // Create a JTabbedPane
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        // --- Tab 1: Notes (JTextArea) ---
-        JTextArea notesArea = new JTextArea();
-        JScrollPane scrollNotes = new JScrollPane(notesArea);
-        tabbedPane.add("Notes", scrollNotes);
+        // --- Profile Tab ---
+        JPanel profilePanel = new JPanel();
+        profilePanel.add(new JLabel("Enter your name:"));
+        JTextField nameField = new JTextField(15);
+        profilePanel.add(nameField);
+        JButton saveNameBtn = new JButton("Save");
+        profilePanel.add(saveNameBtn);
 
-        // --- Tab 2: Reminders (JList) ---
-        String[] reminders = {
-            "Pay bills",
-            "Finish project",
-            "Buy groceries",
-            "Call family"
-        };
+        // --- Settings Tab ---
+        JPanel settingsPanel = new JPanel();
+        settingsPanel.add(new JLabel("Enable Notifications:"));
+        JCheckBox notifCheck = new JCheckBox();
+        settingsPanel.add(notifCheck);
 
-        JList<String> reminderList = new JList<>(reminders);
-        JScrollPane scrollList = new JScrollPane(reminderList);
-        tabbedPane.add("Reminders", scrollList);
+        // --- Dashboard Tab ---
+        JPanel dashboardPanel = new JPanel();
+        JButton refreshBtn = new JButton("Refresh Dashboard");
+        dashboardPanel.add(refreshBtn);
 
-        // Add tabbed pane to the frame
-        frame.add(tabbedPane, BorderLayout.CENTER);
+        // Add tabs
+        tabbedPane.addTab("Profile", profilePanel);
+        tabbedPane.addTab("Settings", settingsPanel);
+        tabbedPane.addTab("Dashboard", dashboardPanel);
+
+        frame.add(tabbedPane);
         frame.setVisible(true);
     }
 }
