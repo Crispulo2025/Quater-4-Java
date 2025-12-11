@@ -1,71 +1,63 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class TableFilterExample {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("JTable Filter Example");
-        frame.setSize(500, 300);
+        JFrame frame = new JFrame("JTable Filtering Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 350);
         frame.setLayout(new BorderLayout());
 
-        // Column names
-        String[] columns = {"Item", "Category", "Price"};
+        // Table Data
+        String[] columns = {"Product", "Category", "Price"};
+        Object[][] data = {
+            {"Laptop", "Electronics", 45000},
+            {"Smartphone", "Electronics", 25000},
+            {"Bananas", "Food", 80},
+            {"Bread", "Food", 50},
+            {"T-shirt", "Clothing", 350},
+            {"Jeans", "Clothing", 900}
+        };
 
-        // Table model
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-
-        // Sample data
-        model.addRow(new Object[]{"Laptop", "Electronics", 50000});
-        model.addRow(new Object[]{"Mouse", "Electronics", 500});
-        model.addRow(new Object[]{"Notebook", "Stationery", 50});
-        model.addRow(new Object[]{"Pen", "Stationery", 20});
-        model.addRow(new Object[]{"Headphones", "Electronics", 2000});
-
+        // Create table model + table
+        DefaultTableModel model = new DefaultTableModel(data, columns);
         JTable table = new JTable(model);
+
+        // Wrap table in scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
 
-        // ComboBox for categories
-        String[] categories = {"All", "Electronics", "Stationery"};
+        // ComboBox for filtering
+        String[] categories = {"All", "Electronics", "Food", "Clothing"};
         JComboBox<String> categoryBox = new JComboBox<>(categories);
 
-        // Button to filter table
-        JButton filterButton = new JButton("Filter");
+        // Panel for combobox
+        JPanel topPanel = new JPanel();
+        topPanel.add(new JLabel("Filter by Category:"));
+        topPanel.add(categoryBox);
 
-        filterButton.addActionListener(new ActionListener() {
+        // Add filter listener
+        categoryBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String selectedCategory = (String) categoryBox.getSelectedItem();
+                String selected = (String) categoryBox.getSelectedItem();
 
-                // Clear table
-                model.setRowCount(0);
+                TableRowSorter<DefaultTableModel> sorter =
+                        new TableRowSorter<>(model);
+                table.setRowSorter(sorter);
 
-                // Re-add rows matching the selected category
-                Object[][] allData = {
-                    {"Laptop", "Electronics", 50000},
-                    {"Mouse", "Electronics", 500},
-                    {"Notebook", "Stationery", 50},
-                    {"Pen", "Stationery", 20},
-                    {"Headphones", "Electronics", 2000}
-                };
-
-                for (Object[] row : allData) {
-                    if (selectedCategory.equals("All") || row[1].equals(selectedCategory)) {
-                        model.addRow(row);
-                    }
+                if (selected.equals("All")) {
+                    sorter.setRowFilter(null); // remove filter
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter(selected, 1));
                 }
             }
         });
 
-        // Panel for controls
-        JPanel controlPanel = new JPanel();
-        controlPanel.setLayout(new FlowLayout());
-        controlPanel.add(new JLabel("Select Category:"));
-        controlPanel.add(categoryBox);
-        controlPanel.add(filterButton);
-
-        frame.add(controlPanel, BorderLayout.NORTH);
+        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
+
         frame.setVisible(true);
     }
 }
