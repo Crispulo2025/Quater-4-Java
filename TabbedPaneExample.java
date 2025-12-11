@@ -3,38 +3,33 @@ import java.awt.*;
 
 public class TabbedPaneExample {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("JTabbedPane Example");
-        frame.setSize(400, 250);
+
+        JFrame frame = new JFrame("Notes and Reminders");
+        frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create the TabbedPane
-        JTabbedPane tabs = new JTabbedPane();
+        // Create a JTabbedPane
+        JTabbedPane tabbedPane = new JTabbedPane();
 
-        // -------------------- HOME PANEL --------------------
-        JPanel homePanel = new JPanel();
-        homePanel.setLayout(new FlowLayout());
-        homePanel.add(new JLabel("Welcome to Home!"));
-        homePanel.add(new JButton("Click Me"));
+        // --- Tab 1: Notes (JTextArea) ---
+        JTextArea notesArea = new JTextArea();
+        JScrollPane scrollNotes = new JScrollPane(notesArea);
+        tabbedPane.add("Notes", scrollNotes);
 
-        // -------------------- PROFILE PANEL --------------------
-        JPanel profilePanel = new JPanel();
-        profilePanel.setLayout(new FlowLayout());
-        profilePanel.add(new JLabel("Name:"));
-        profilePanel.add(new JTextField(12));
+        // --- Tab 2: Reminders (JList) ---
+        String[] reminders = {
+            "Pay bills",
+            "Finish project",
+            "Buy groceries",
+            "Call family"
+        };
 
-        // -------------------- SETTINGS PANEL --------------------
-        JPanel settingsPanel = new JPanel();
-        settingsPanel.setLayout(new FlowLayout());
-        settingsPanel.add(new JLabel("Enable notifications:"));
-        settingsPanel.add(new JCheckBox());
+        JList<String> reminderList = new JList<>(reminders);
+        JScrollPane scrollList = new JScrollPane(reminderList);
+        tabbedPane.add("Reminders", scrollList);
 
-        // Add panels to tabs
-        tabs.add("Home", homePanel);
-        tabs.add("Profile", profilePanel);
-        tabs.add("Settings", settingsPanel);
-
-        // Add to frame
-        frame.add(tabs);
+        // Add tabbed pane to the frame
+        frame.add(tabbedPane, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 }
