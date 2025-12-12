@@ -1,43 +1,44 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GridBagExample extends JFrame {
+public class GridBagExample {
+    public static void main(String[] args) {
 
-    public GridBagExample() {
-        // Set frame properties
-        setTitle("GridBagLayout Example");
-        setSize(400, 150);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        JFrame frame = new JFrame("GridBagLayout Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(350, 300);
 
-        // Create panel with GridBagLayout
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // padding around components
 
-        // JLabel spanning two columns
-        JLabel label = new JLabel("Enter your information:");
-        gbc.gridx = 0; // column 0
-        gbc.gridy = 0; // row 0
-        gbc.gridwidth = 2; // span 2 columns
-        gbc.anchor = GridBagConstraints.CENTER;
-        panel.add(label, gbc);
+        gbc.insets = new Insets(5, 5, 5, 5); // spacing around components
 
-        // JTextField below in one column
-        JTextField textField = new JTextField(20);
-        gbc.gridx = 0; // column 0
-        gbc.gridy = 1; // row 1
-        gbc.gridwidth = 1; // single column
-        gbc.anchor = GridBagConstraints.WEST;
-        panel.add(textField, gbc);
+        // Button 1 at (0,0)
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(new JButton("Button 1"), gbc);
 
-        // Add panel to frame
-        add(panel);
-    }
+        // Button 2 at (1,0)
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel.add(new JButton("Button 2"), gbc);
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new GridBagExample().setVisible(true);
-        });
+        // Button 3 at (0,1)
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(new JButton("Button 3"), gbc);
+
+        // Button 4 at (1,1)
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(new JButton("Button 4"), gbc);
+
+        // Button 5 at (0,2)
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(new JButton("Button 5"), gbc);
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
 }
