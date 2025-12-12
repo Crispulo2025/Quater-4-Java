@@ -1,46 +1,43 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class ToDoListGUI extends JFrame {
+public class ToDoListGUI {
+    public static void main(String[] args) {
 
-    private DefaultListModel<String> listModel;
-    private JList<String> todoList;
-    private JTextField taskField;
+        JFrame frame = new JFrame("To-Do List");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setLayout(new BorderLayout(10, 10));
 
-    public ToDoListGUI() {
-        // Frame properties
-        setTitle("To-Do List");
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        setLayout(new BorderLayout(10, 10));
-
-        // Top panel: JTextField + Add button
-        JPanel topPanel = new JPanel(new BorderLayout(5, 5));
-        taskField = new JTextField();
+        // ----- Top Panel: Input field and Add button -----
+        JPanel topPanel = new JPanel(new FlowLayout());
+        JTextField taskField = new JTextField(20);
         JButton addButton = new JButton("Add");
-        topPanel.add(taskField, BorderLayout.CENTER);
-        topPanel.add(addButton, BorderLayout.EAST);
-        add(topPanel, BorderLayout.NORTH);
+        topPanel.add(taskField);
+        topPanel.add(addButton);
 
-        // Center panel: JList inside JScrollPane
-        listModel = new DefaultListModel<>();
-        todoList = new JList<>(listModel);
-        JScrollPane scrollPane = new JScrollPane(todoList);
-        add(scrollPane, BorderLayout.CENTER);
+        // ----- Center Panel: JList inside JScrollPane -----
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        JList<String> taskList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(taskList);
 
-        // Bottom panel: Remove and Clear buttons
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // ----- Bottom Panel: Remove and Clear buttons -----
+        JPanel bottomPanel = new JPanel(new FlowLayout());
         JButton removeButton = new JButton("Remove");
         JButton clearButton = new JButton("Clear");
         bottomPanel.add(removeButton);
         bottomPanel.add(clearButton);
-        add(bottomPanel, BorderLayout.SOUTH);
 
-        // Action listeners
+        // ----- Add panels to frame -----
+        frame.add(topPanel, BorderLayout.NORTH);
+        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+        // ----- Button Actions -----
         addButton.addActionListener(e -> {
             String task = taskField.getText().trim();
             if (!task.isEmpty()) {
@@ -50,18 +47,14 @@ public class ToDoListGUI extends JFrame {
         });
 
         removeButton.addActionListener(e -> {
-            int selectedIndex = todoList.getSelectedIndex();
+            int selectedIndex = taskList.getSelectedIndex();
             if (selectedIndex != -1) {
                 listModel.remove(selectedIndex);
             }
         });
 
         clearButton.addActionListener(e -> listModel.clear());
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new ToDoListGUI().setVisible(true);
-        });
+        frame.setVisible(true);
     }
 }
