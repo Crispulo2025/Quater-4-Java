@@ -1,89 +1,56 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ResponsiveForm extends JFrame {
-
-    public ResponsiveForm() {
-        // Frame properties
-        setTitle("Responsive Form Example");
-        setSize(500, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Panel with GridBagLayout for responsiveness
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL; // expand horizontally
-        gbc.weightx = 1.0; // allow horizontal expansion
-
-        // Labels and text fields
-        JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField();
-
-        JLabel emailLabel = new JLabel("Email:");
-        JTextField emailField = new JTextField();
-
-        JLabel passwordLabel = new JLabel("Password:");
-        JTextField passwordField = new JTextField();
-
-        // Buttons
-        JButton submitButton = new JButton("Submit");
-        JButton cancelButton = new JButton("Cancel");
-
-        // Add components to panel
-
-        // Name row
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0.3;
-        panel.add(nameLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.weightx = 0.7;
-        panel.add(nameField, gbc);
-
-        // Email row
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 0.3;
-        panel.add(emailLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.weightx = 0.7;
-        panel.add(emailField, gbc);
-
-        // Password row
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weightx = 0.3;
-        panel.add(passwordLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.weightx = 0.7;
-        panel.add(passwordField, gbc);
-
-        // Buttons row
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 0)); // two buttons side by side
-        buttonPanel.add(submitButton);
-        buttonPanel.add(cancelButton);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        panel.add(buttonPanel, gbc);
-
-        add(panel);
-    }
-
+public class ResponsiveForm {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new ResponsiveForm().setVisible(true);
-        });
+        JFrame frame = new JFrame("Responsive Form");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(450, 250);
+
+        // Main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Form panel using GridBagLayout
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Row 1
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0;       // label stays fixed
+        formPanel.add(new JLabel("First Name:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;       // text field expands
+        formPanel.add(new JTextField(15), gbc);
+
+        // Row 2
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Last Name:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        formPanel.add(new JTextField(15), gbc);
+
+        // Row 3
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Email:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        formPanel.add(new JTextField(15), gbc);
+
+        // Add form panel to main panel
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+
+        frame.add(mainPanel);
+        frame.setVisible(true);
     }
 }
