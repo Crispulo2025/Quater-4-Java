@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class ToDoListGUI {
     public static void main(String[] args) {
-
+        // Create the main frame
         JFrame frame = new JFrame("To-Do List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -22,9 +22,6 @@ public class ToDoListGUI {
         JList<String> taskList = new JList<>(listModel);
         JScrollPane scrollPane = new JScrollPane(taskList);
 
-        JPanel centerPanel = new JPanel(new BorderLayout());
-        centerPanel.add(scrollPane, BorderLayout.CENTER);
-
         // ----- Bottom Panel: Remove and Clear buttons -----
         JPanel bottomPanel = new JPanel(new FlowLayout());
         JButton removeButton = new JButton("Remove");
@@ -34,10 +31,10 @@ public class ToDoListGUI {
 
         // ----- Add panels to frame -----
         frame.add(topPanel, BorderLayout.NORTH);
-        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(scrollPane, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
-        // ----- Button Actions -----
+        // ----- Add button functionality -----
         addButton.addActionListener(e -> {
             String task = taskField.getText().trim();
             if (!task.isEmpty()) {
@@ -46,6 +43,7 @@ public class ToDoListGUI {
             }
         });
 
+        // ----- Remove button functionality -----
         removeButton.addActionListener(e -> {
             int selectedIndex = taskList.getSelectedIndex();
             if (selectedIndex != -1) {
@@ -53,8 +51,10 @@ public class ToDoListGUI {
             }
         });
 
+        // ----- Clear button functionality -----
         clearButton.addActionListener(e -> listModel.clear());
 
+        // Make frame visible
         frame.setVisible(true);
     }
 }
