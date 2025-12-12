@@ -1,29 +1,43 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class BorderLayoutExample {
-    public static void main(String[] args) {
-        // Create a JFrame
-        JFrame frame = new JFrame("BorderLayout Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+public class BorderLayoutExample extends JFrame {
 
-        // Set BorderLayout for the frame
-        frame.setLayout(new BorderLayout());
+    public BorderLayoutExample() {
+        // Set frame properties
+        setTitle("BorderLayout Example");
+        setSize(500, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-        // NORTH region: JLabel
-        JLabel nameLabel = new JLabel("Cris Maranan", JLabel.CENTER);
-        frame.add(nameLabel, BorderLayout.NORTH);
+        // Set BorderLayout
+        setLayout(new BorderLayout(10, 10)); // 10px gaps between regions
 
-        // CENTER region: JTextArea
+        // NORTH → Header label
+        JLabel headerLabel = new JLabel("Header", SwingConstants.CENTER);
+        add(headerLabel, BorderLayout.NORTH);
+
+        // WEST → JList with 5 items
+        String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+        JList<String> itemList = new JList<>(items);
+        add(new JScrollPane(itemList), BorderLayout.WEST);
+
+        // CENTER → JTextArea
         JTextArea textArea = new JTextArea();
-        frame.add(textArea, BorderLayout.CENTER);
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
 
-        // SOUTH region: JButton
-        JButton submitButton = new JButton("Submit");
-        frame.add(submitButton, BorderLayout.SOUTH);
+        // EAST → Options button
+        JButton optionsButton = new JButton("Options");
+        add(optionsButton, BorderLayout.EAST);
 
-        // Make frame visible
-        frame.setVisible(true);
+        // SOUTH → Status label
+        JLabel statusLabel = new JLabel("Status", SwingConstants.CENTER);
+        add(statusLabel, BorderLayout.SOUTH);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new BorderLayoutExample().setVisible(true);
+        });
     }
 }
