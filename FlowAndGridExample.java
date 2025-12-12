@@ -1,37 +1,30 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class FlowAndGridExample extends JFrame {
-
-    public FlowAndGridExample() {
-        // Frame properties
-        setTitle("FlowLayout and GridLayout Example");
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Main frame uses BorderLayout
-        setLayout(new BorderLayout(10, 10));
-
-        // Top panel with FlowLayout
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JTextField textField = new JTextField(15);
-        JButton submitButton = new JButton("Submit");
-        topPanel.add(textField);
-        topPanel.add(submitButton);
-        add(topPanel, BorderLayout.NORTH);
-
-        // Center panel with GridLayout 2x2
-        JPanel centerPanel = new JPanel(new GridLayout(2, 2, 5, 5)); // 5px horizontal and vertical gaps
-        for (int i = 1; i <= 4; i++) {
-            centerPanel.add(new JButton("Button " + i));
-        }
-        add(centerPanel, BorderLayout.CENTER);
-    }
-
+public class FlowAndGridExample {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new FlowAndGridExample().setVisible(true);
-        });
+        JFrame frame = new JFrame("Flow + Grid Layout Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 250);
+        frame.setLayout(new BorderLayout());
+
+        // --- TOP PANEL: FlowLayout ---
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        JTextField inputField = new JTextField(15);
+        JButton submitButton = new JButton("Submit");
+        topPanel.add(inputField);
+        topPanel.add(submitButton);
+
+        // --- BOTTOM PANEL: GridLayout 2x3 ---
+        JPanel bottomPanel = new JPanel(new GridLayout(2, 3, 5, 5));
+        for (int i = 1; i <= 6; i++) {
+            bottomPanel.add(new JButton("Button " + i));
+        }
+
+        // Add panels to frame
+        frame.add(topPanel, BorderLayout.NORTH);
+        frame.add(bottomPanel, BorderLayout.CENTER);
+
+        frame.setVisible(true);
     }
 }
