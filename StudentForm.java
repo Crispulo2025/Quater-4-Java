@@ -1,53 +1,62 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class StudentForm {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Student Information Form");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new FlowLayout());
+public class StudentForm extends JFrame {
 
-        // Components
-        JLabel nameLabel = new JLabel("Student Name:");
-        JTextField nameField = new JTextField(20);
+    public StudentForm() {
+        // Set frame properties
+        setTitle("Student Information Form");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Create panel with GridLayout (4 rows, 2 columns)
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10)); // 10px horizontal & vertical gaps
+
+        // Create labels and text fields
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField();
+
+        JLabel ageLabel = new JLabel("Age:");
+        JTextField ageField = new JTextField();
 
         JLabel gradeLabel = new JLabel("Grade Level:");
-        String[] grades = {"Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"};
-        JComboBox<String> gradeBox = new JComboBox<>(grades);
+        JTextField gradeField = new JTextField();
 
-        JTextArea outputArea = new JTextArea(10, 30);
-        outputArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(outputArea);
+        JButton submitButton = new JButton("Submit");
 
-        JButton addButton = new JButton("Add Student");
+        // Add components to the panel
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(ageLabel);
+        panel.add(ageField);
+        panel.add(gradeLabel);
+        panel.add(gradeField);
+        panel.add(new JLabel()); // empty placeholder to align button
+        panel.add(submitButton);
 
-        // Button Action
-        addButton.addActionListener(new ActionListener() {
+        // Add panel to the frame
+        add(panel);
+
+        // Action listener for the button
+        submitButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText().trim();
-                String grade = (String) gradeBox.getSelectedItem();
+                String name = nameField.getText();
+                String age = ageField.getText();
+                String grade = gradeField.getText();
 
-                if (name.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a student name.");
-                    return;
-                }
-
-                outputArea.append(name + " – " + grade + "\n");
-                nameField.setText("");
-                nameField.requestFocus();
+                JOptionPane.showMessageDialog(null,
+                        "Student Info:\nName: " + name + "\nAge: " + age + "\nGrade Level: " + grade);
             }
         });
+    }
 
-        // Add components to frame
-        frame.add(nameLabel);
-        frame.add(nameField);
-        frame.add(gradeLabel);
-        frame.add(gradeBox);
-        frame.add(addButton);
-        frame.add(scrollPane);
-
-        frame.setVisible(true);
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new StudentForm().setVisible(true);
+        });
     }
 }
