@@ -1,74 +1,38 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class RegistrationForm extends JFrame {
-
-    public RegistrationForm() {
-        // Frame properties
-        setTitle("Registration Form");
-        setSize(600, 150);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Main panel with horizontal BoxLayout
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        // Name
-        JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField(10);
-
-        // Age
-        JLabel ageLabel = new JLabel("Age:");
-        JTextField ageField = new JTextField(5);
-
-        // Address
-        JLabel addressLabel = new JLabel("Address:");
-        JTextField addressField = new JTextField(15);
-
-        // Submit button
-        JButton submitButton = new JButton("Submit");
-
-        // Add components with horizontal spacing
-        panel.add(nameLabel);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(nameField);
-        panel.add(Box.createHorizontalStrut(15));
-
-        panel.add(ageLabel);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(ageField);
-        panel.add(Box.createHorizontalStrut(15));
-
-        panel.add(addressLabel);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(addressField);
-        panel.add(Box.createHorizontalStrut(15));
-
-        panel.add(submitButton);
-
-        // Action listener for Submit button
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
-                String age = ageField.getText();
-                String address = addressField.getText();
-
-                JOptionPane.showMessageDialog(null,
-                        "Name: " + name + "\nAge: " + age + "\nAddress: " + address);
-            }
-        });
-
-        add(panel);
-    }
-
+public class RegistrationForm {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new RegistrationForm().setVisible(true);
-        });
+
+        JFrame frame = new JFrame("Registration Form");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(350, 250);
+        frame.setLayout(new BorderLayout());
+
+        // ----- NORTH: Header -----
+        JPanel topPanel = new JPanel();
+        topPanel.add(new JLabel("Registration Form"));
+        frame.add(topPanel, BorderLayout.NORTH);
+
+        // ----- CENTER: Form fields using GridLayout -----
+        JPanel centerPanel = new JPanel(new GridLayout(3, 2, 5, 5));
+
+        centerPanel.add(new JLabel("Name:"));
+        centerPanel.add(new JTextField(12));
+
+        centerPanel.add(new JLabel("Age:"));
+        centerPanel.add(new JTextField(5));
+
+        centerPanel.add(new JLabel("Email:"));
+        centerPanel.add(new JTextField(12));
+
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        // ----- SOUTH: Submit button -----
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(new JButton("Submit"));
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
     }
 }
