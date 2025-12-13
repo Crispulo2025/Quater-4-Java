@@ -1,24 +1,31 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.GridLayout;
 
 public class GridLayoutExample {
     public static void main(String[] args) {
-        // Create a frame
+
+        // Create the JFrame
         JFrame frame = new JFrame("GridLayout Example");
+
+        // Set GridLayout with 2 rows and 2 columns
+        frame.setLayout(new GridLayout(2, 2));
+
+        // Create four buttons
+        JButton button1 = new JButton("Button 1");
+        JButton button2 = new JButton("Button 2");
+        JButton button3 = new JButton("Button 3");
+        JButton button4 = new JButton("Button 4");
+
+        // Add buttons to the frame
+        frame.add(button1);
+        frame.add(button2);
+        frame.add(button3);
+        frame.add(button4);
+
+        // Set frame properties
+        frame.setSize(300, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 300);
-
-        // Set GridLayout with 3 rows and 4 columns, 5px horizontal and vertical gaps
-        frame.setLayout(new GridLayout(3, 4, 5, 5));
-
-        // Add twelve JLabel components
-        for (int i = 1; i <= 12; i++) {
-            JLabel label = new JLabel("Label " + i, SwingConstants.CENTER);
-            label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            frame.add(label);
-        }
-
-        // Make frame visible
         frame.setVisible(true);
     }
 }
