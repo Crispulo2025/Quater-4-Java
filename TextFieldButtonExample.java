@@ -1,43 +1,30 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
 
 public class TextFieldButtonExample {
     public static void main(String[] args) {
-        // Create the main frame
-        JFrame frame = new JFrame("TextField and Button Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
 
-        // Create the main panel with BorderLayout
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        // Create the JFrame
+        JFrame frame = new JFrame("Input Example");
 
-        // Create top panel for JTextField and button using FlowLayout
-        JPanel inputPanel = new JPanel(new FlowLayout());
-        JTextField textField = new JTextField(15);
+        // Set layout manager
+        frame.setLayout(new FlowLayout());
+
+        // Create a JTextField wide enough for a short sentence
+        JTextField textField = new JTextField(25);
+
+        // Create a JButton
         JButton submitButton = new JButton("Submit");
-        inputPanel.add(textField);
-        inputPanel.add(submitButton);
 
-        // Create label to display the text
-        JLabel displayLabel = new JLabel("Your text will appear here.", JLabel.CENTER);
+        // Add components to the frame
+        frame.add(textField);
+        frame.add(submitButton);
 
-        // Add panels to main panel
-        panel.add(inputPanel, BorderLayout.NORTH);
-        panel.add(displayLabel, BorderLayout.CENTER);
-
-        // Add action listener to button
-        submitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String text = textField.getText();
-                displayLabel.setText(text);
-            }
-        });
-
-        // Add main panel to frame
-        frame.add(panel);
-
-        // Make frame visible
+        // Set frame properties
+        frame.setSize(400, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
