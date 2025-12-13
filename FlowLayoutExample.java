@@ -1,48 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class FlowLayoutExample extends JFrame {
-
-    public FlowLayoutExample() {
-        // Frame properties
-        setTitle("FlowLayout Centered Example");
-        setSize(400, 150);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Panel with centered FlowLayout
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-
-        // JTextField
-        JTextField textField = new JTextField(15);
-
-        // Buttons
-        JButton okButton = new JButton("OK");
-        JButton cancelButton = new JButton("Cancel");
-
-        // Add components to panel
-        panel.add(textField);
-        panel.add(okButton);
-        panel.add(cancelButton);
-
-        // Add action listeners (optional)
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Text entered: " + textField.getText());
-            }
-        });
-
-        cancelButton.addActionListener(e -> textField.setText("")); // clears the text field
-
-        add(panel);
-    }
-
+public class FlowLayoutExample {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new FlowLayoutExample().setVisible(true);
-        });
+        // Create a frame
+        JFrame frame = new JFrame("FlowLayout Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
+
+        // Set FlowLayout
+        frame.setLayout(new FlowLayout());
+
+        // Add five buttons
+        frame.add(new JButton("Button 1"));
+        frame.add(new JButton("Button 2"));
+        frame.add(new JButton("Button 3"));
+        frame.add(new JButton("Button 4"));
+        frame.add(new JButton("Button 5"));
+
+        // Make frame visible
+        frame.setVisible(true);
     }
 }
