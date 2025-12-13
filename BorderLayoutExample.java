@@ -1,43 +1,45 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class BorderLayoutExample extends JFrame {
-
-    public BorderLayoutExample() {
-        // Set frame properties
-        setTitle("BorderLayout Example");
-        setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+public class BorderLayoutExample {
+    public static void main(String[] args) {
+        // Create a frame
+        JFrame frame = new JFrame("BorderLayout Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 400);
 
         // Set BorderLayout
-        setLayout(new BorderLayout(10, 10)); // 10px gaps between regions
+        frame.setLayout(new BorderLayout());
 
-        // NORTH → Header label
-        JLabel headerLabel = new JLabel("Header", SwingConstants.CENTER);
-        add(headerLabel, BorderLayout.NORTH);
+        // Create panels with different colors
+        JPanel northPanel = new JPanel();
+        northPanel.setBackground(Color.RED);
+        northPanel.add(new JLabel("NORTH"));
 
-        // WEST → JList with 5 items
-        String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-        JList<String> itemList = new JList<>(items);
-        add(new JScrollPane(itemList), BorderLayout.WEST);
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(Color.BLUE);
+        southPanel.add(new JLabel("SOUTH"));
 
-        // CENTER → JTextArea
-        JTextArea textArea = new JTextArea();
-        add(new JScrollPane(textArea), BorderLayout.CENTER);
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(Color.GREEN);
+        eastPanel.add(new JLabel("EAST"));
 
-        // EAST → Options button
-        JButton optionsButton = new JButton("Options");
-        add(optionsButton, BorderLayout.EAST);
+        JPanel westPanel = new JPanel();
+        westPanel.setBackground(Color.ORANGE);
+        westPanel.add(new JLabel("WEST"));
 
-        // SOUTH → Status label
-        JLabel statusLabel = new JLabel("Status", SwingConstants.CENTER);
-        add(statusLabel, BorderLayout.SOUTH);
-    }
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBackground(Color.LIGHT_GRAY);
+        centerPanel.add(new JLabel("CENTER"));
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new BorderLayoutExample().setVisible(true);
-        });
+        // Add panels to frame
+        frame.add(northPanel, BorderLayout.NORTH);
+        frame.add(southPanel, BorderLayout.SOUTH);
+        frame.add(eastPanel, BorderLayout.EAST);
+        frame.add(westPanel, BorderLayout.WEST);
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        // Make frame visible
+        frame.setVisible(true);
     }
 }
