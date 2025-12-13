@@ -1,24 +1,29 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
 
 public class FlowLayoutExample {
     public static void main(String[] args) {
-        // Create a frame
-        JFrame frame = new JFrame("FlowLayout Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
 
-        // Set FlowLayout
+        // Create the JFrame
+        JFrame frame = new JFrame("FlowLayout Example");
+
+        // Set FlowLayout as the layout manager
         frame.setLayout(new FlowLayout());
 
-        // Add five buttons
-        frame.add(new JButton("Button 1"));
-        frame.add(new JButton("Button 2"));
-        frame.add(new JButton("Button 3"));
-        frame.add(new JButton("Button 4"));
-        frame.add(new JButton("Button 5"));
+        // Create buttons
+        JButton startButton = new JButton("Start");
+        JButton stopButton = new JButton("Stop");
+        JButton resetButton = new JButton("Reset");
 
-        // Make frame visible
+        // Add buttons to the frame
+        frame.add(startButton);
+        frame.add(stopButton);
+        frame.add(resetButton);
+
+        // Set frame properties
+        frame.setSize(400, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
