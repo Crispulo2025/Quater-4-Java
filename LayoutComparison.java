@@ -3,34 +3,35 @@ import java.awt.*;
 
 public class LayoutComparison {
     public static void main(String[] args) {
-        // Create main frame
-        JFrame frame = new JFrame("FlowLayout vs GridLayout");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
+        // Frame with no layout manager
+        JFrame frameNoLayout = new JFrame("No Layout Manager");
+        frameNoLayout.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameNoLayout.setSize(300, 150);
+        frameNoLayout.setLayout(null); // no layout manager
 
-        // Main panel with GridLayout (2 rows x 1 column)
-        JPanel mainPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        // Buttons manually positioned
+        JButton btn1 = new JButton("Button 1");
+        btn1.setBounds(10, 20, 80, 30); // x, y, width, height
+        JButton btn2 = new JButton("Button 2");
+        btn2.setBounds(100, 20, 80, 30);
+        JButton btn3 = new JButton("Button 3");
+        btn3.setBounds(190, 20, 80, 30);
 
-        // Panel with FlowLayout
-        JPanel flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        flowPanel.setBorder(BorderFactory.createTitledBorder("FlowLayout"));
-        for (int i = 1; i <= 6; i++) {
-            flowPanel.add(new JButton("Button " + i));
-        }
+        frameNoLayout.add(btn1);
+        frameNoLayout.add(btn2);
+        frameNoLayout.add(btn3);
+        frameNoLayout.setVisible(true);
 
-        // Panel with GridLayout
-        JPanel gridPanel = new JPanel(new GridLayout(2, 3, 10, 10));
-        gridPanel.setBorder(BorderFactory.createTitledBorder("GridLayout"));
-        for (int i = 1; i <= 6; i++) {
-            gridPanel.add(new JButton("Button " + i));
-        }
+        // Frame with FlowLayout
+        JFrame frameFlowLayout = new JFrame("FlowLayout Example");
+        frameFlowLayout.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameFlowLayout.setSize(300, 150);
+        frameFlowLayout.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10)); // FlowLayout with gaps
 
-        // Add both panels to main panel
-        mainPanel.add(flowPanel);
-        mainPanel.add(gridPanel);
-
-        // Add main panel to frame
-        frame.add(mainPanel);
-        frame.setVisible(true);
+        // Buttons automatically arranged
+        frameFlowLayout.add(new JButton("Button 1"));
+        frameFlowLayout.add(new JButton("Button 2"));
+        frameFlowLayout.add(new JButton("Button 3"));
+        frameFlowLayout.setVisible(true);
     }
 }
