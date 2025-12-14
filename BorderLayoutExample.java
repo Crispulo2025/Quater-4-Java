@@ -1,31 +1,27 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class BorderLayoutExample {
     public static void main(String[] args) {
-
-        // Create the JFrame
+        // Create the frame
         JFrame frame = new JFrame("BorderLayout Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
 
-        // Set BorderLayout as the layout manager
+        // Set BorderLayout (default for JFrame, but set explicitly for clarity)
         frame.setLayout(new BorderLayout());
 
         // Create components
-        JLabel label = new JLabel("This is the NORTH region", JLabel.CENTER);
-        JButton button = new JButton("Click Me");
-        JTextField textField = new JTextField();
+        JLabel labelNorth = new JLabel("Welcome to the Application", JLabel.CENTER);
+        JButton buttonSouth = new JButton("Submit");
+        JTextArea textAreaCenter = new JTextArea();
 
-        // Add components to specific regions
-        frame.add(label, BorderLayout.NORTH);
-        frame.add(button, BorderLayout.SOUTH);
-        frame.add(textField, BorderLayout.CENTER);
+        // Add components to the frame
+        frame.add(labelNorth, BorderLayout.NORTH);
+        frame.add(buttonSouth, BorderLayout.SOUTH);
+        frame.add(new JScrollPane(textAreaCenter), BorderLayout.CENTER);
 
-        // Set frame properties
-        frame.setSize(400, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Make frame visible
         frame.setVisible(true);
     }
 }
