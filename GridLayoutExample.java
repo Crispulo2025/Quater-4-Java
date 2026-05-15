@@ -1,31 +1,35 @@
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
-public class GridLayoutExample {
+public class GridLayoutExample extends JFrame {
+
+    public GridLayoutExample() {
+
+        // Frame settings
+        setTitle("GridLayout Example");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create panel with GridLayout
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 3, 10, 10));
+
+        // Add six buttons
+        panel.add(new JButton("Button 1"));
+        panel.add(new JButton("Button 2"));
+        panel.add(new JButton("Button 3"));
+        panel.add(new JButton("Button 4"));
+        panel.add(new JButton("Button 5"));
+        panel.add(new JButton("Button 6"));
+
+        // Add panel to frame
+        add(panel);
+
+        // Display frame
+        setVisible(true);
+    }
+
     public static void main(String[] args) {
-
-        // Create the JFrame
-        JFrame frame = new JFrame("GridLayout Example");
-
-        // Set GridLayout with 2 rows and 2 columns
-        frame.setLayout(new GridLayout(2, 2));
-
-        // Create four buttons
-        JButton button1 = new JButton("Button 1");
-        JButton button2 = new JButton("Button 2");
-        JButton button3 = new JButton("Button 3");
-        JButton button4 = new JButton("Button 4");
-
-        // Add buttons to the frame
-        frame.add(button1);
-        frame.add(button2);
-        frame.add(button3);
-        frame.add(button4);
-
-        // Set frame properties
-        frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        new GridLayoutExample();
     }
 }
