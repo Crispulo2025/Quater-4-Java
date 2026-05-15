@@ -1,27 +1,34 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
 
 public class BorderLayoutExample {
-    public static void main(String[] args) {
-        // Create the frame
-        JFrame frame = new JFrame("BorderLayout Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
 
-        // Set BorderLayout (default for JFrame, but set explicitly for clarity)
+    public static void main(String[] args) {
+
+        // Create JFrame
+        JFrame frame = new JFrame("BorderLayout Example");
+
+        // Set BorderLayout
         frame.setLayout(new BorderLayout());
 
-        // Create components
-        JLabel labelNorth = new JLabel("Welcome to the Application", JLabel.CENTER);
-        JButton buttonSouth = new JButton("Submit");
-        JTextArea textAreaCenter = new JTextArea();
+        // Create buttons for each region
+        JButton northButton = new JButton("NORTH");
+        JButton southButton = new JButton("SOUTH");
+        JButton eastButton = new JButton("EAST");
+        JButton westButton = new JButton("WEST");
+        JButton centerButton = new JButton("CENTER");
 
-        // Add components to the frame
-        frame.add(labelNorth, BorderLayout.NORTH);
-        frame.add(buttonSouth, BorderLayout.SOUTH);
-        frame.add(new JScrollPane(textAreaCenter), BorderLayout.CENTER);
+        // Add buttons to respective regions
+        frame.add(northButton, BorderLayout.NORTH);
+        frame.add(southButton, BorderLayout.SOUTH);
+        frame.add(eastButton, BorderLayout.EAST);
+        frame.add(westButton, BorderLayout.WEST);
+        frame.add(centerButton, BorderLayout.CENTER);
 
-        // Make frame visible
+        // Frame settings
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
