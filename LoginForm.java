@@ -1,39 +1,41 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
 
 public class LoginForm {
+
     public static void main(String[] args) {
+
+        // Create JFrame
         JFrame frame = new JFrame("Login Form");
-        frame.setSize(350, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout(10, 10));
 
-        // Title label
-        JLabel titleLabel = new JLabel("User Login", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        // Set GridLayout (3 rows, 2 columns)
+        frame.setLayout(new GridLayout(3, 2));
 
-        // Form panel
-        JPanel formPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        // Create components
         JLabel userLabel = new JLabel("Username:");
         JTextField userField = new JTextField();
+
         JLabel passLabel = new JLabel("Password:");
-        JPasswordField passField = new JPasswordField();
+        JTextField passField = new JTextField();
 
-        formPanel.add(userLabel);
-        formPanel.add(userField);
-        formPanel.add(passLabel);
-        formPanel.add(passField);
-
-        // Button panel
-        JPanel buttonPanel = new JPanel();
         JButton loginButton = new JButton("Login");
-        buttonPanel.add(loginButton);
 
-        // Add components to frame
-        frame.add(titleLabel, BorderLayout.NORTH);
-        frame.add(formPanel, BorderLayout.CENTER);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
+        // Add components in order (GridLayout fills row by row)
+        frame.add(userLabel);
+        frame.add(userField);
 
+        frame.add(passLabel);
+        frame.add(passField);
+
+        frame.add(new JLabel()); // empty cell for spacing
+        frame.add(loginButton);
+
+        // Frame settings
+        frame.setSize(400, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
