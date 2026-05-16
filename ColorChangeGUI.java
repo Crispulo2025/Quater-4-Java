@@ -5,44 +5,34 @@ import java.awt.event.*;
 public class ColorChangeGUI {
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame("Color Change GUI");
+        JFrame frame = new JFrame("Background Color Changer");
+        frame.setSize(400, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new BorderLayout(10, 10));
+        frame.setLayout(new FlowLayout());
 
-        // ----- NORTH Panel -----
-        JPanel northPanel = new JPanel();
-        northPanel.setBackground(Color.CYAN);
-        JButton northButton = new JButton("Change Center Color");
-        northPanel.add(northButton);
+        // Create buttons
+        JButton blueButton = new JButton("Blue");
+        JButton redButton = new JButton("Red");
 
-        // ----- CENTER Panel -----
-        JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(Color.LIGHT_GRAY);
+        // Action for Blue button
+        blueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().setBackground(Color.BLUE);
+            }
+        });
 
-        // ----- SOUTH Panel -----
-        JPanel southPanel = new JPanel();
-        southPanel.setBackground(Color.ORANGE);
-        JButton southButton = new JButton("Change Center Color");
-        southPanel.add(southButton);
+        // Action for Red button
+        redButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().setBackground(Color.RED);
+            }
+        });
 
-        // ----- Add panels to frame -----
-        frame.add(northPanel, BorderLayout.NORTH);
-        frame.add(centerPanel, BorderLayout.CENTER);
-        frame.add(southPanel, BorderLayout.SOUTH);
-
-        // ----- Action: Change CENTER panel color randomly -----
-        ActionListener changeColor = e -> {
-            Color randomColor = new Color(
-                    (float)Math.random(),
-                    (float)Math.random(),
-                    (float)Math.random()
-            );
-            centerPanel.setBackground(randomColor);
-        };
-
-        northButton.addActionListener(changeColor);
-        southButton.addActionListener(changeColor);
+        // Add buttons to frame
+        frame.add(blueButton);
+        frame.add(redButton);
 
         frame.setVisible(true);
     }
