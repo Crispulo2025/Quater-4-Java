@@ -1,44 +1,48 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.FlowLayout;
 
-public class CounterApp extends JFrame implements ActionListener {
-
-    private int counter = 0;
-    private JLabel counterLabel;
-    private JButton incrementButton;
-
-    public CounterApp() {
-
-        // Frame settings
-        setTitle("Counter Application");
-        setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
-
-        // Label to display counter
-        counterLabel = new JLabel("Counter: 0");
-        counterLabel.setFont(new Font("Arial", Font.BOLD, 20));
-
-        // Button to increment counter
-        incrementButton = new JButton("Increment");
-        incrementButton.addActionListener(this);
-
-        // Add components to frame
-        add(counterLabel);
-        add(incrementButton);
-
-        // Make frame visible
-        setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        counter++;
-        counterLabel.setText("Counter: " + counter);
-    }
+public class CounterApp {
 
     public static void main(String[] args) {
-        new CounterApp();
+
+        // Create JFrame
+        JFrame frame = new JFrame("Counter Application");
+
+        // Set layout
+        frame.setLayout(new FlowLayout());
+
+        // Counter value
+        final int[] counter = {0};
+
+        // Label to display counter
+        JLabel label = new JLabel("Counter: 0");
+
+        // Buttons
+        JButton increaseButton = new JButton("Increase");
+        JButton resetButton = new JButton("Reset");
+
+        // Increase counter
+        increaseButton.addActionListener(e -> {
+            counter[0]++;
+            label.setText("Counter: " + counter[0]);
+        });
+
+        // Reset counter
+        resetButton.addActionListener(e -> {
+            counter[0] = 0;
+            label.setText("Counter: 0");
+        });
+
+        // Add components
+        frame.add(label);
+        frame.add(increaseButton);
+        frame.add(resetButton);
+
+        // Frame settings
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }
