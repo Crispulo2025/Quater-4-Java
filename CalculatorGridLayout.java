@@ -3,32 +3,26 @@ import java.awt.*;
 
 public class CalculatorGridLayout {
     public static void main(String[] args) {
-        // Create the frame
-        JFrame frame = new JFrame("Simple Calculator");
+
+        JFrame frame = new JFrame("Calculator Interface");
+        frame.setSize(300, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 350);
 
-        // Create a panel with GridLayout (4 rows, 4 columns)
+        // Panel with GridLayout
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4, 5, 5));
+        panel.setLayout(new GridLayout(4, 3, 5, 5));
 
-        // Button labels
-        String[] buttons = {
-            "7", "8", "9", "/",
-            "4", "5", "6", "*",
-            "1", "2", "3", "-",
-            "0", "=", "+", "C"
-        };
-
-        // Create and add buttons
-        for (String text : buttons) {
-            panel.add(new JButton(text));
+        // Number buttons 1–9
+        for (int i = 1; i <= 9; i++) {
+            panel.add(new JButton(String.valueOf(i)));
         }
 
-        // Add panel to frame
-        frame.add(panel);
+        // Additional buttons
+        panel.add(new JButton("0"));
+        panel.add(new JButton("+"));
+        panel.add(new JButton("="));
 
-        // Make frame visible
+        frame.add(panel);
         frame.setVisible(true);
     }
 }
